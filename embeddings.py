@@ -34,11 +34,11 @@ def get_embedding():
 
             def embed_documents(self, documents):
                 texts = [d.page_content if hasattr(d, "page_content") else str(d) for d in documents]
-                embs = self.model.encode(texts, show_progress_bar=False)
+                embs = self.model.encode(texts, show_progress_bar=True)
                 return [list(map(float, e)) for e in embs]
 
             def embed_query(self, text):
-                v = self.model.encode([text], show_progress_bar=False)[0]
+                v = self.model.encode([text], show_progress_bar=True)[0]
                 return list(map(float, v))    
                        
         return HFEmbeddings()
