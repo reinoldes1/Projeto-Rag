@@ -10,7 +10,9 @@ BASE_FOLDER = "base"
 
 def create_db():
     documents = load_documents() # Load the documents of the database | Dá load nos documentos da base de dados
+    print(f"Documentos carregados:{len(documents)}")
     chunks = split_chunks(documents) #Split the documents in chunks | Divide os documentos em chunks de texto
+    print(f"Chunks criados: {len(chunks)}")
     vector_chunks(chunks) #Transform the chunks in vectors with embedding | Transforma os chunks em vetores com embedding
 
 def load_documents():
@@ -32,11 +34,11 @@ def split_chunks(documents):
 def vector_chunks(chunks):
     try:
         embedding = get_embedding()
-        database = Chroma.from_documents(chunks, embedding, persist_directory = "database")
+        db = Chroma.from_documents(chunks, embedding, persist_directory = "database")
         print("Banco de dados Criado")
     except Exception as e:
         print("Erro ao criar banco de dados: ", e)
     
 
-
-create_db()
+if __name__ == "__main__":
+    create_db()

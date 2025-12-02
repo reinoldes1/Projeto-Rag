@@ -45,4 +45,3 @@ def get_embedding():
     except Exception as e2:
         print("Falha no fallback local: ", e2)
         raise
-    
